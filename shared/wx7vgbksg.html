@@ -44,14 +44,17 @@
     </div>
     <div id="content"></div>
     
-    <script id="data" type="application/json">{ "ct": "z7isJJhxh8TVu2tvRepFhSPCnTC0M2h0/u4F/FMwASLAICrL5eSkRDY9IAW8v8gbF4Y417LFl3FJw7IW+dxtfyIvk6zvbHFwDOhn3RvW/v7NPJrfJb7/S5GwI5e3NGfS6lM+drEPfYtHj/L1Tl5CSAazeCpZ9rWG81HNlZ/BCIqyvN75jHl2iL0sSMmOVx2/wqoVons9rluKUjlgnrLRMATP310x5IydrDVT9afVladN9Sc+fd/dZmOFchsS/z98hJ/+rwHOjdar1LZ33P9mIhoPfb2Qum5+krGMqFBgSzVmJoh2x3SyDSl1ePAoPKAYByT+B2FIzWfTHAuQzFTZ4cZzf1DhCJDKrCMnCOGgdf+IQuyz+Ye9VfmbYz9qFUlTffAnJDqNVAxY/PtsixVGxInXP7Z/joXH0fDnNbJExhyWKB7ov+eOKwn8nPUCb040g3LUnR7hYW6bbY9C9sgj7ts23Gx87Ml24Lom/khAN2nS758tinN0BZJwODVFwi4NRGTDYwFdFBEZ8ES0aeMtbZ/VtpQgTxXR6Ga3+Gs7WoC/dDGo6goCzpMbCi+nYXb4sVleHANfETUo1xCKwOlPSt+Rfc2E3HjhvHdYziBalF/wHUKZYN3hph+yBMXKwCnQNrqyxPcC0znfCQ==", "iv": "2bJSBb7oKwZYLHnv" }</script>
+    <script id="data" type="application/json">{ "ct": "OxNC+DBHSc1BPBxqJa6UcLVUWDPqNwGPVboLQzQiGph58R8YSKg258Zg46KqDdF3TZIF46kv4SEw6Jl5wsuuQ91bp+bw0qX0/wztfK72C/0Uc6XwEixTzevz/alOExWX+ByUXypS4RDi6ngYLuJ8BOyL8B++YyMhs4mZ1oSo48sp4EPA4crdILkl3cchDKiaaO/JdIhSCRt/90VIuarJIYoB/yPg5vu0+A132hfvlCXIgUAT36Zc9o/OviiqxvggBthMxYbh5ifSBoVYPS0x+vf9IDBSWuDHqw/GduTcHXHRE81klYHtF7001xW/Eq9rYhD9eM46/h4PXBzcTN380JNCgCRRhQZeQnN6D3qpObggm7E8EqpQolK5/ZbHGBk33oiMwubXkgeZddLhEjkcNIJDGA/vamsWae9uBHKc4n8dI3a/Qzusn2A/3DA1ruhMld77c0DmV8lIP83OXZqNJoT8dIULiPrvKzfPJ73J2CrjGw0iRWqBY6QJVjJGXyYnMkYb1ZYFAxj4P76dwt2x55OegNHySuh94pKXB9APRMmFmhkiYcDZSven6GdCMW0A35kp1KL6FdvuZun8rJ6oAxaIko7nuT13RsqPAPpHJ/bA56XaTxenynEYtyP7Q1OfWUDcq111iprdHA==", "iv": "p1Xp7KH9SEEzIhiI" }</script>
     
     <script>
         (async () => {
             try {
-                // Get key from URL fragment
-                const hash = window.location.hash.substring(1);
+                // Get key from URL fragment, decoding URI component to handle special chars if any
+                let hash = window.location.hash.substring(1);
                 if(!hash) throw new Error("No key provided in URL");
+                
+                // Try decoding component if it was encoded
+                try { hash = decodeURIComponent(hash); } catch(e) {}
 
                 // Decode Key
                 const keyBytes = Uint8Array.from(atob(hash), c => c.charCodeAt(0));
@@ -66,7 +69,7 @@
                 const ct = Uint8Array.from(atob(data.ct), c => c.charCodeAt(0));
 
                 // Decrypt
-                const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+                const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv, tagLength: 128 }, key, ct);
                 const html = new TextDecoder().decode(decrypted);
 
                 // Render
