@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina web de prueba</title>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f4f4f5; font-family: system-ui, sans-serif; color: #333; }
+        #loader { text-align: center; color: #666; transition: opacity 0.5s; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #e4e4e7; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        #content { opacity: 0; transition: opacity 0.5s; width: 100%; max-width: 800px; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 20px; display: none; }
+        #error { display: none; color: #ef4444; text-align: center; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 400px; margin: 20px; }
+        h1 { margin-top: 0; font-size: 2.5em; }
+        img { max-width: 100%; border-radius: 8px; }
+        pre { background: #f4f4f5; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        blockquote { border-left: 4px solid #e4e4e7; padding-left: 15px; margin: 20px 0; font-style: italic; color: #666; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #e4e4e7; padding: 10px; text-align: left; }
+        th { background: #f4f4f5; }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        hr { border: none; border-top: 1px solid #e4e4e7; margin: 30px 0; }
+        
+        @media (prefers-color-scheme: dark) {
+            body { background: #18181b; color: #e4e4e7; }
+            #content, #error { background: #27272a; color: #e4e4e7; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            pre, th { background: #3f3f46; }
+            blockquote { border-left-color: #3f3f46; color: #a1a1aa; }
+            th, td, hr { border-color: #3f3f46; }
+            .spinner { border-color: #3f3f46; border-top-color: #60a5fa; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div>Decrypting secure note...</div>
+    </div>
+    <div id="error">
+        <h2 style="margin-top: 0;">Access Denied</h2>
+        <p>Invalid key or corrupted data.</p>
+        <p style="font-size: 0.9em; color: #888;">Make sure you have the complete URL including the part after the #.</p>
+    </div>
+    <div id="content"></div>
+    
+    <script id="data" type="application/json">{ "ct": "Js1Qo3xfpVeIZmxcrL2y6KyDkR/2DwliKrPH1ouh2rxd4kvMHpMx/pPgef4RQhyuVK0Mw9tfO0OR3xHAdsg+9R3uhJzhemOgMOTyA4Vb76I69meOcyN8M1AMTYS8xvBEQ5qfEkBAu6cBrR6+zL0AILQ64j57w/2AbVNHJZzpXKTbwepATSygm7wonFg/IAJx4MeaXHcecMR84rx4Wn7Zpb7p0iBC0zYcDFrBYHjg/0N94YeTK3GxsAK/2IvozPL6jYtlSodlKrOzE78o8rpxnnj78T/E6gvQf1a5kO7X/I0aCsg4/F2u7HMFDijkxrpkfsYR3+so+ERwTVUQ3+7HDpJKTC1svUgOBwrJGDIOh3D4idzE5T9BJhXRjD7jNs6gPH+9Ljk9hb6+gTXhDuO8NPX5X6+x78YvutiomgSsfqqCW6zrL4XKlYFti4hEbFwTr0QAWy+lNiRPj0Y8PgJwt/KCZBWD6Min5fstXvykt4yHGQaJ8u+WsNGdFdCwbYz4YbfbPe8scBdi3dhPHLPH114IoMlNR/1KSFcHR08t1uCpmOt5cV11GlHBVjOMyhicfUXyzsNVqUzLf3gIPkTbkJ/6Y53YaapcNdkAZOViC82KI9HUV5ZJSg/TlvhIGX4fH4gZCy46KdBOmSHHnwOkqVMl4sDlhpqTSJTwQWfSLrH6UXKJMw1sghukJWMUMrRj5T5SvYndy7e3ZBJw/16VDqHIKZmGOFa2qLzCxOaQKaFUdDkeNIlGq620cIdEC00gRHomlRYksUjrb8+L4xafZXVzm60VoQ6h6bPVXZNzr3Ep7qYHYBDGvk/XxutYNGsS5N4KFGeIWQf0j7dQ4e3eIL7xeezIBSsko/6C7d+ACpxrZpLFY9oyqXPLJEV149RmOShg9fyhecPX4RUPNqUwwBl98x2docWQZJSpdOZIi4F5S+TA+H+hGRn2zrH21+T+Aw==", "iv": "HgMl+PxHGPZJOlxf" }</script>
+    
+    <script>
+        (async () => {
+            try {
+                // Get key from URL fragment, decoding URI component to handle special chars if any
+                let hash = window.location.hash.substring(1);
+                if(!hash) throw new Error("No key provided in URL");
+                
+                // Try decoding component if it was encoded
+                try { hash = decodeURIComponent(hash); } catch(e) {}
+
+                // Decode Key
+                const keyBytes = Uint8Array.from(atob(hash), c => c.charCodeAt(0));
+                const key = await crypto.subtle.importKey("raw", keyBytes, "AES-GCM", true, ["decrypt"]);
+                
+                // Decode Data
+                const dataEl = document.getElementById("data");
+                if (!dataEl) throw new Error("Encrypted data missing");
+                
+                const data = JSON.parse(dataEl.textContent);
+                const iv = Uint8Array.from(atob(data.iv), c => c.charCodeAt(0));
+                const ct = Uint8Array.from(atob(data.ct), c => c.charCodeAt(0));
+
+                // Decrypt
+                const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv, tagLength: 128 }, key, ct);
+                const html = new TextDecoder().decode(decrypted);
+
+                // Render
+                const contentDiv = document.getElementById("content");
+                contentDiv.innerHTML = html;
+                document.getElementById("loader").style.display = "none";
+                contentDiv.style.display = "block";
+                
+                // Fade in
+                requestAnimationFrame(() => {
+                    contentDiv.style.opacity = 1;
+                });
+                
+                document.title = "Pagina web de prueba";
+                
+            } catch (e) {
+                console.error(e);
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("error").style.display = "block";
+            }
+        })();
+    </script>
+</body>
+</html>
