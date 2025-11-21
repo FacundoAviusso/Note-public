@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Untitled">
+    <title>Untitled</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-code: #1e1e1e;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --callout-info: #dbeafe;
+            --callout-warning: #fef3c7;
+            --callout-danger: #fee2e2;
+            --callout-success: #d1fae5;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --border-color: #334155;
+                --callout-info: #1e3a5f;
+                --callout-warning: #4a3f1f;
+                --callout-danger: #4a1f1f;
+                --callout-success: #1f3a2f;
+            }
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 { font-size: 2.5rem; margin-top: 0; margin-bottom: 1.5rem; }
+        h2 { font-size: 2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+        h3 { font-size: 1.5rem; }
+        
+        p { margin-bottom: 1rem; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-hover); }
+        
+        ul, ol { margin: 1.5rem 0; padding-left: 2rem; }
+        ul.checklist { list-style: none; padding-left: 0; }
+        ul.checklist li { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+        
+        code {
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: var(--bg-code);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        pre code { background: none; padding: 0; }
+        
+        blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        .callout {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .callout-info { background: var(--callout-info); border-color: #3b82f6; }
+        .callout-warning { background: var(--callout-warning); border-color: #f59e0b; }
+        .callout-danger { background: var(--callout-danger); border-color: #ef4444; }
+        .callout-success { background: var(--callout-success); border-color: #10b981; }
+        
+        .hero {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.9));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #3b82f6;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .card img { width: 100%; border-radius: 8px; margin-bottom: 1rem; }
+        .card h3 { margin-top: 0; margin-bottom: 0.5rem; }
+        
+        .grid { display: grid; gap: 1.5rem; margin: 1.5rem 0; }
+        .cols-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .cols-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .cols-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        
+        .progress-wrapper { margin: 1.5rem 0; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .progress-bar { height: 12px; background: var(--bg-secondary); border-radius: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 6px; transition: width 0.3s ease; }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+        
+        .banner { padding: 1rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+        .banner-info { background: #dbeafe; color: #1e40af; }
+        .banner-warning { background: #fef3c7; color: #92400e; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { font-weight: 600; background: var(--bg-secondary); }
+        
+        hr { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1.5rem; }
+            h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2rem; }
+            .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <p>&lt;h2&gt;Prueba 2&lt;/h2&gt;</p>
+<p>&lt;div class=&quot;hero&quot; style=&quot;&quot;&gt;&lt;div class=&quot;hero-overlay&quot;&gt;&lt;/div&gt;&lt;div class=&quot;hero-content&quot;&gt;&lt;h1&gt;Hero&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</p>
+    </div>
+</body>
+</html>
