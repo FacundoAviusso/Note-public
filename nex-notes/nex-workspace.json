@@ -1,16 +1,9 @@
-[
-  {
-    "id": "default",
-    "name": "Personal",
-    "createdAt": 1763752514108,
-    "syncEnabled": false,
-    "visibility": "private"
-  },
-  {
-    "id": "r4axdk7ow",
+{
+  "2y2dvedkh": {
     "name": "Red Howl",
-    "createdAt": 1763752573171,
-    "syncEnabled": true,
-    "visibility": "public"
+    "visibility": "public",
+    "owner": "",
+    "allowedUsers": [],
+    "pendingRequests": []
   }
-]
+}
