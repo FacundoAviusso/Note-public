@@ -1,16 +1,16 @@
-[
-  {
-    "id": "default",
+{
+  "default": {
     "name": "Personal",
-    "createdAt": 1763727453322,
-    "syncEnabled": false,
-    "visibility": "private"
+    "visibility": "private",
+    "owner": "",
+    "allowedUsers": [],
+    "pendingRequests": []
   },
-  {
-    "id": "yibi4ggaw",
+  "pd8nalypv": {
     "name": "Red Howl",
-    "createdAt": 1763727494011,
-    "syncEnabled": true,
-    "visibility": "public"
+    "visibility": "public",
+    "owner": "",
+    "allowedUsers": [],
+    "pendingRequests": []
   }
-]
+}
