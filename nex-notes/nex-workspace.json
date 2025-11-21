@@ -1,16 +1,16 @@
-{
-  "default": {
+[
+  {
+    "id": "default",
     "name": "Personal",
-    "visibility": "private",
-    "owner": "",
-    "allowedUsers": [],
-    "pendingRequests": []
+    "createdAt": 1763748217469,
+    "syncEnabled": false,
+    "visibility": "private"
   },
-  "zlflz703j": {
+  {
+    "id": "w1m4kunbq",
     "name": "Red Howl",
-    "visibility": "public",
-    "owner": "",
-    "allowedUsers": [],
-    "pendingRequests": []
+    "createdAt": 1763748276107,
+    "syncEnabled": true,
+    "visibility": "public"
   }
-}
+]
