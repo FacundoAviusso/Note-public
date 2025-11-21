@@ -1,1 +1,16 @@
-{}
+[
+  {
+    "id": "default",
+    "name": "Personal",
+    "createdAt": 1763727453322,
+    "syncEnabled": false,
+    "visibility": "private"
+  },
+  {
+    "id": "yibi4ggaw",
+    "name": "Red Howl",
+    "createdAt": 1763727494011,
+    "syncEnabled": true,
+    "visibility": "public"
+  }
+]
