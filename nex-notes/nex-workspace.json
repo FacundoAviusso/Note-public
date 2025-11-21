@@ -2,14 +2,14 @@
   {
     "id": "default",
     "name": "Personal",
-    "createdAt": 1763749194871,
+    "createdAt": 1763751571066,
     "syncEnabled": false,
     "visibility": "private"
   },
   {
-    "id": "r1e9esct4",
+    "id": "1843anc95",
     "name": "Red Howl",
-    "createdAt": 1763749212165,
+    "createdAt": 1763751588060,
     "syncEnabled": true,
     "visibility": "public"
   }
